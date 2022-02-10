@@ -1,0 +1,1164 @@
+{
+	"info": {
+		"_postman_id": "4f8945eb-3b99-4c77-9ca6-4b666e893937",
+		"name": "AoD (Assistence on Demand)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert licenseplate valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check valid licenseplate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isValid).to.eql(\"J\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/salescontracts/sales/contracts/validation?licenseplate=1UAQ064&type=aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"salescontracts",
+						"sales",
+						"contracts",
+						"validation"
+					],
+					"query": [
+						{
+							"key": "licenseplate",
+							"value": "1UAQ064"
+						},
+						{
+							"key": "type",
+							"value": "aod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert licenseplate not valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isValid).to.eql(\"N\");\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/salescontracts/sales/contracts/validation?licenseplate=1UAQ064GFF&type=aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"salescontracts",
+						"sales",
+						"contracts",
+						"validation"
+					],
+					"query": [
+						{
+							"key": "licenseplate",
+							"value": "1UAQ064GFF"
+						},
+						{
+							"key": "type",
+							"value": "aod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CardNA get model brand",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check if car manufacturer is returned\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.carinfo[0].manufacturer).to.eql(\"VOLKSWAGEN\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check if car model is returned\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.carinfo[0].model).to.eql(\"TIGUAN\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-EX-AoD}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-ext-tst.azure-api.net/sparta/vehicles/vehicles/cardna/wvgzzz5nzhw848806",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-ext-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"vehicles",
+						"vehicles",
+						"cardna",
+						"wvgzzz5nzhw848806"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify sms validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-EX-Sparta}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-ext-tst.azure-api.net/sparta/authentication/authentication/smsvalidation?mobile=0472887226&validationcode=132",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-ext-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"authentication",
+						"authentication",
+						"smsvalidation"
+					],
+					"query": [
+						{
+							"key": "mobile",
+							"value": "0472887226"
+						},
+						{
+							"key": "validationcode",
+							"value": "132"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify sms validation- Unhappy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-EX-Sparta}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Trace",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"mobile\": \"0472887226\",\r\n   \"langcode\": \"N\"\r\n\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-ext-tst.azure-api.net/sparta/authentication/authentication/smsvalidation?mobile=0474951914&langcode=nl",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-ext-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"authentication",
+						"authentication",
+						"smsvalidation"
+					],
+					"query": [
+						{
+							"key": "mobile",
+							"value": "0474951914"
+						},
+						{
+							"key": "langcode",
+							"value": "nl"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wachttijd postcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check TimeInMinutes\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(parseInt(jsonData.TimeInMinutes)).to.satisfy(Number.isInteger);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/responsetime?postalcode=2030",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"responsetime"
+					],
+					"query": [
+						{
+							"key": "postalcode",
+							"value": "2030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wachttijd postcode unhappy flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Postal code is NaN\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.usermessage).to.eql(\"Requested data not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/responsetime?postalcode=NaN",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"responsetime"
+					],
+					"query": [
+						{
+							"key": "postalcode",
+							"value": "NaN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pech doorsturen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"source\":\"VAB\",\r\n   \"licenseplate\":\"1XXX000\",\r\n   \"licenseplatecovered\":\"N\",\r\n   \"breakdowncode\":\"MBKO\",\r\n   \"breakdownlocation\":\"51.16168763117797, 4.990662171817779\",\r\n   \"breakdownlocation_customerinput\":\"Kerkstraat 1, 2060 Antwerpen, Belgium\",\r\n   \"breakdownlocation_extrainfo\":\"info over de pechlocatie\",\r\n   \"breakdownaddressgoogleanalytics\":{\r\n      \"street\":\"vermeulenstraat\",\r\n      \"housenumber\":\"19\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"9160\",\r\n      \"countrycode\":\"BE\",\r\n      \"city\":\"LOKEREN\"\r\n   },\r\n   \"address\":{\r\n      \"street\":\"veldstraat\",\r\n      \"housenumber\":\"161\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"2430\",\r\n      \"city\":\"LAAKDAL\",\r\n      \"countrycode\":\"BE\"\r\n   },\r\n   \"maxwaitingtime\":\"90\",\r\n   \"additionalinfo\":\"info over pechvragen\",\r\n   \"closedparking\":\"Y\",\r\n   \"breakdownprice\":\"1500000\",\r\n   \"uniqueid\":\"1500\",\r\n   \"contact\":{\r\n      \"lastname\":\"Wilms\",\r\n      \"firstname\":\"Bert\",\r\n      \"languagecode\":\"NL\",\r\n      \"sex\":\"M\",\r\n      \"dateofbirth\":\"1973-04-09\",\r\n      \"title\":\"Dhr.\"\r\n   },\r\n   \"communication\":{\r\n      \"email\":\"test@vab.be\",\r\n      \"phone\":\"+*32496803223\"\r\n   },\r\n   \"bankaccount\":{\r\n      \"accountnumber\":\"BE71096123456769\",\r\n      \"bic\":\"KREDBEBB\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/breakdown/sales/aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"breakdown",
+						"sales",
+						"aod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pech doorsturen unhappy flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"    pm.test(\"Wrong source error message\", function () {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData.errormessage).to.eql(\"Required field contact.contactid missing\");\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"source\":\"VAAB\",\r\n   \"licenseplate\":\"1XXX0009\",\r\n   \"licenseplatecovered\":\"N\",\r\n   \"breakdowncode\":\"MBKO\",\r\n   \"breakdownlocation\":\"51.16168763117797, 4.990662171817779\",\r\n   \"breakdownlocation_customerinput\":\"Kerkstraat 1, 2060 Antwerpen, Belgium\",\r\n   \"breakdownlocation_extrainfo\":\"info over de pechlocatie\",\r\n   \"breakdownaddressgoogleanalytics\":{\r\n      \"street\":\"vermeulenstraat\",\r\n      \"housenumber\":\"19\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"9160\",\r\n      \"countrycode\":\"BE\",\r\n      \"city\":\"LOKEREN\"\r\n   },\r\n   \"address\":{\r\n      \"street\":\"veldstraat\",\r\n      \"housenumber\":\"161\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"2430\",\r\n      \"city\":\"LAAKDAL\",\r\n      \"countrycode\":\"BE\"\r\n   },\r\n   \"maxwaitingtime\":\"90\",\r\n   \"additionalinfo\":\"info over pechvragen\",\r\n   \"closedparking\":\"Y\",\r\n   \"breakdownprice\":\"1500000\",\r\n   \"uniqueid\":\"1500\",\r\n   \"contact\":{\r\n      \"lastname\":\"Wilms\",\r\n      \"firstname\":\"Bert\",\r\n      \"languagecode\":\"NL\",\r\n      \"sex\":\"M\",\r\n      \"dateofbirth\":\"1973-04-09\",\r\n      \"title\":\"Dhr.\"\r\n   },\r\n   \"communication\":{\r\n      \"email\":\"test@vab.be\",\r\n      \"phone\":\"+*32496803223\"\r\n   },\r\n   \"bankaccount\":{\r\n      \"accountnumber\":\"BE71096123456769\",\r\n      \"bic\":\"KREDBEBB\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/breakdown/sales/aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"breakdown",
+						"sales",
+						"aod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bevestigingspagina",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/dossiers/17931BB7026A8FEC8CC8CB5FF232DB0051327C540B206392455CB679AAF7529B/status?type=aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"dossiers",
+						"17931BB7026A8FEC8CC8CB5FF232DB0051327C540B206392455CB679AAF7529B",
+						"status"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "aod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bevestigingspagina unhappy flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Wrong parameter entered, requested data not found message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errormessage).to.eql(\"Requested data not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/dossiers/17931BB7026A8FEC8CC8CB5FF232DB0051327C540B206392455CB679AAF7529B/status?type=aodd",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"dossiers",
+						"17931BB7026A8FEC8CC8CB5FF232DB0051327C540B206392455CB679AAF7529B",
+						"status"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "aodd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "45d41ed366ac42cc85d8e801481e4cae",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CancelReason\"  : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/dossiers/6673381/cancellation?type=aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"dossiers",
+						"6673381",
+						"cancellation"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "aod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancellation unhappy flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"errormessage\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "TransactionId",
+						"value": "GUID",
+						"type": "default"
+					},
+					{
+						"key": "User",
+						"value": "aod",
+						"type": "default"
+					},
+					{
+						"key": "Application",
+						"value": "vabonline",
+						"type": "default"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "45d41ed366ac42cc85d8e801481e4cae",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Ca1ncelReasonn\"  : \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/sparta/roadsideassistance/roadsideassistance/dossiers/6673381/cancellation?type=aod",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"sparta",
+						"roadsideassistance",
+						"roadsideassistance",
+						"dossiers",
+						"6673381",
+						"cancellation"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "aod"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch KBC HTML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"binarydata is returned\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"binarydata\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"mimetype is returned and contains: text/html\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.mimetype).to.eql(\"text/html\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"filename is returned and contains: KbcPayPage.html\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.filename).to.eql(\"KbcPayPage.html\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ogm is returned\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"ogm\");\r",
+							"});\r",
+							"\r",
+							"/*\r",
+							"ogm is always +1 after is call, how to check this ?\r",
+							"pm.test(\"ogm is returned and contains: 002/9335/44425 \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.ogm).to.eql(\"002/9335/44627\");\r",
+							"});*/ \r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"source\":\"VAB\",\r\n   \"licenseplate\":\"1XXX000\",\r\n   \"licenseplatecovered\":\"N\",\r\n   \"breakdowncode\":\"MBKO\",\r\n   \"breakdownlocation\":\"51.16168763117797, 4.990662171817779\",\r\n   \"breakdownlocation_customerinput\":\"Kerkstraat 1, 2060 Antwerpen, Belgium\",\r\n   \"breakdownlocation_extrainfo\":\"info over de pechlocatie\",\r\n   \"breakdownaddressgoogleanalytics\":{\r\n      \"street\":\"vermeulenstraat\",\r\n      \"housenumber\":\"19\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"9160\",\r\n      \"countrycode\":\"BE\",\r\n      \"city\":\"LOKEREN\"\r\n   },\r\n   \"address\":{\r\n      \"street\":\"veldstraat\",\r\n      \"housenumber\":\"161\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"2430\",\r\n      \"city\":\"LAAKDAL\",\r\n      \"countrycode\":\"BE\"\r\n   },\r\n   \"maxwaitingtime\":\"90\",\r\n   \"additionalinfo\":\"info over pechvragen\",\r\n   \"closedparking\":\"Y\",\r\n   \"breakdownprice\":\"1500000\",\r\n   \"uniqueid\":\"1500\",\r\n   \"contact\":{\r\n      \"lastname\":\"Wilms\",\r\n      \"firstname\":\"Bert\",\r\n      \"languagecode\":\"NL\",\r\n      \"sex\":\"M\",\r\n      \"dateofbirth\":\"1973-04-09\",\r\n      \"title\":\"Dhr.\"\r\n   },\r\n   \"communication\":{\r\n      \"email\":\"test@vab.be\",\r\n      \"phone\":\"+*32496803223\"\r\n   },\r\n   \"bankaccount\":{\r\n      \"accountnumber\":\"BE71096123456769\",\r\n      \"bic\":\"KREDBEBB\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/aod/payment/aodpayment/rest/aodpaymentapi/fetchkbchtml",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"aod",
+						"payment",
+						"aodpayment",
+						"rest",
+						"aodpaymentapi",
+						"fetchkbchtml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch KBC HTML unhappy flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"error message is displayed\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.errormessage).to.eql(\"Missing fields: Wrong values: source; \");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"haserror equals true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.haserror).to.eql(true);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"source\":\"VAAB\",\r\n   \"licenseplate\":\"1XXX000\",\r\n   \"licenseplatecovered\":\"N\",\r\n   \"breakdowncode\":\"MBKO\",\r\n   \"breakdownlocation\":\"51.16168763117797, 4.990662171817779\",\r\n   \"breakdownlocation_customerinput\":\"Kerkstraat 1, 2060 Antwerpen, Belgium\",\r\n   \"breakdownlocation_extrainfo\":\"info over de pechlocatie\",\r\n   \"breakdownaddressgoogleanalytics\":{\r\n      \"street\":\"vermeulenstraat\",\r\n      \"housenumber\":\"19\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"9160\",\r\n      \"countrycode\":\"BE\",\r\n      \"city\":\"LOKEREN\"\r\n   },\r\n   \"address\":{\r\n      \"street\":\"veldstraat\",\r\n      \"housenumber\":\"161\",\r\n      \"box\":\"\",\r\n      \"postalcode\":\"2430\",\r\n      \"city\":\"LAAKDAL\",\r\n      \"countrycode\":\"BE\"\r\n   },\r\n   \"maxwaitingtime\":\"90\",\r\n   \"additionalinfo\":\"info over pechvragen\",\r\n   \"closedparking\":\"Y\",\r\n   \"breakdownprice\":\"1500000\",\r\n   \"uniqueid\":\"1500\",\r\n   \"contact\":{\r\n      \"lastname\":\"Wilms\",\r\n      \"firstname\":\"Bert\",\r\n      \"languagecode\":\"NL\",\r\n      \"sex\":\"M\",\r\n      \"dateofbirth\":\"1973-04-09\",\r\n      \"title\":\"Dhr.\"\r\n   },\r\n   \"communication\":{\r\n      \"email\":\"test@vab.be\",\r\n      \"phone\":\"+*32496803223\"\r\n   },\r\n   \"bankaccount\":{\r\n      \"accountnumber\":\"BE71096123456769\",\r\n      \"bic\":\"KREDBEBB\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/aod/payment/aodpayment/rest/aodpaymentapi/fetchkbchtml",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"aod",
+						"payment",
+						"aodpayment",
+						"rest",
+						"aodpaymentapi",
+						"fetchkbchtml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add contract after payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"ogm\": \"02/9335/33917\",\r\n   \"amount\": \"175\",\r\n   \"brand\": \"\",\r\n   \"cn\": \"\",\r\n   \"complus\": \"\",\r\n   \"currency\": \"eur\",\r\n   \"ncerror\": \"\",\r\n   \"payid\": \"\",\r\n   \"pm\": \"\",\r\n   \"status\": \"\",\r\n   \"trxdate\": \"\",\r\n   \"shasign\": \"\"\r\n\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/aod/payment/aodpayment/rest/aodpaymentapi/contract",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"aod",
+						"payment",
+						"aodpayment",
+						"rest",
+						"aodpaymentapi",
+						"contract"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AOD fetch customer details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Source equals: VAB\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.source).to.eql(\"VAB\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"OGM equals: 002/9335/34018\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.ogm).to.eql(\"002/9335/34018\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{TST-APIMGR-AoD}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apim-vab-apo-passthru-tst.azure-api.net/aod/payment/aodpayment/rest/aodpaymentapi/dossierinfo?ogm=002/9335/34018",
+					"protocol": "https",
+					"host": [
+						"apim-vab-apo-passthru-tst",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"aod",
+						"payment",
+						"aodpayment",
+						"rest",
+						"aodpaymentapi",
+						"dossierinfo"
+					],
+					"query": [
+						{
+							"key": "ogm",
+							"value": "002/9335/34018"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "DEV-APIMGR-KEY",
+			"value": "f9b56f1944b74aaa89f578cadc07ee88"
+		},
+		{
+			"key": "TST-APIMGR-External",
+			"value": "72339ec7023849529b13a6b57f9091f1"
+		},
+		{
+			"key": "TST-APIMGR-EX-AoD",
+			"value": "72339ec7023849529b13a6b57f9091f1"
+		},
+		{
+			"key": "TST-APIMGR-EX-Sparta",
+			"value": "5a9b988470c248f297aedc346fba9faf"
+		},
+		{
+			"key": "TST-APIMGR-AoD",
+			"value": "56868516ac1f4d86b1539e248ac80a5b"
+		}
+	]
+}
